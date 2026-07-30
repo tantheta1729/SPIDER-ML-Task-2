@@ -51,5 +51,6 @@
 │   ├── index.html          # Frontend UI layout
 │   ├── style.css           # Medical Blue & Spider theme styling
 │   └── script.js           # API communication and SSE token rendering
+|___UI.png
 ├── app.py                  # FastAPI application and routing logic
 └── README.md
