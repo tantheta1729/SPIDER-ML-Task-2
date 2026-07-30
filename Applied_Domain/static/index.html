@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dr,lowkey Assistant</title>
+    <!-- Bumped to v=105 to bust the cache! -->
+    <link rel="stylesheet" href="/static/style.css?v=105">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-title">
+                <i class="fa-solid fa-spider brand-icon"></i>
+                <div>
+                    <h1>Dr.Lowkey</h1>
+                    <p class="subtitle">Web-Crawling Medical Expert</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button id="export-btn" class="secondary-btn" title="Export Consultation Summary">
+                    <i class="fa-solid fa-file-export"></i> Export Report
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Chat Area -->
+        <main id="chat-window" class="chat-window">
+            <div class="welcome-card">
+                <i class="fa-solid fa-staff-snake welcome-icon"></i>
+                <h2>Welcome to Dr.Lowkey's Web</h2>
+                <p>Ask health questions if you dare. Answers are retrieved directly from my sticky web of knowledge. 🕸️</p>
+            </div>
+        </main>
+
+        <!-- Input Section -->
+        <footer class="chat-footer">
+            <form id="chat-form" class="input-form">
+                <input type="text" id="user-input" placeholder="Ask a health question (e.g., What are the symptoms of dengue?)" autocomplete="off" required>
+                <button type="submit" id="send-btn" class="primary-btn">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
+            </form>
+            <div class="disclaimer">
+                ⚠️ <strong>NOT A DOCTOR BTW.</strong> Seriously. In case of emergency, call 108 or your local emergency number immediately.
+            </div>
+        </footer>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

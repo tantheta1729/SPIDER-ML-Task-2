@@ -1,0 +1,402 @@
+:root {
+    /* Full Medical Blue Palette */
+    --primary: #0284c7; /* Standard Clinical Blue */
+    --primary-hover: #0369a1;
+    
+    /* Spider Motif Accents (Now Royal/Medical Blue instead of Red) */
+    --spider-accent: #1d4ed8; 
+    --spider-accent-hover: #1e3a8a;
+    
+    /* Light Theme Backgrounds */
+    --bg-page: #f0f9ff; /* Very faint medical blue background */
+    --bg-card: #ffffff; 
+    --bg-panel: #f8fafc; 
+    
+    /* Text & Lines */
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --border-light: #e0f2fe;
+    --silk-thread: rgba(2, 132, 199, 0.08); /* Faint blue web */
+    
+    /* Status */
+    --emergency-bg: #eff6ff;
+    --emergency-text: #1d4ed8;
+    --success-green: #059669;
+    --warning-amber: #d97706;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+}
+
+/* =========================================
+   PAGE BACKGROUND (The Clinical Spider Web)
+   ========================================= */
+body {
+    background-color: var(--bg-page);
+    background-image: 
+        repeating-linear-gradient(45deg, var(--silk-thread) 0, var(--silk-thread) 1px, transparent 1px, transparent 40px),
+        repeating-linear-gradient(-45deg, var(--silk-thread) 0, var(--silk-thread) 1px, transparent 1px, transparent 40px);
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+    overflow: hidden; /* Keeps crawling spiders contained */
+}
+
+/* --- AN ARMY OF CRAWLING BACKGROUND SPIDERS --- */
+body::before, body::after {
+    content: "\f717"; /* FontAwesome Spider */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: fixed;
+    color: rgba(2, 132, 199, 0.12); /* Faint medical blue spiders */
+    z-index: -1; 
+}
+
+/* Using text-shadow to multiply the spiders all over the screen */
+body::before {
+    font-size: 50px;
+    animation: crawlDiagonal 35s linear infinite;
+    text-shadow: 
+        300px 400px 0 rgba(2, 132, 199, 0.12),
+        -500px 800px 0 rgba(2, 132, 199, 0.12),
+        800px -200px 0 rgba(2, 132, 199, 0.12),
+        -200px -600px 0 rgba(2, 132, 199, 0.12);
+}
+
+body::after {
+    font-size: 35px;
+    animation: crawlUp 40s linear infinite 5s; 
+    text-shadow: 
+        -400px 300px 0 rgba(2, 132, 199, 0.12),
+        600px 500px 0 rgba(2, 132, 199, 0.12),
+        -300px -400px 0 rgba(2, 132, 199, 0.12),
+        700px -100px 0 rgba(2, 132, 199, 0.12);
+}
+
+@keyframes crawlDiagonal {
+    0% { top: -20%; left: -20%; transform: rotate(135deg) translateX(0); }
+    25% { transform: rotate(135deg) translateX(5px); } 
+    50% { transform: rotate(135deg) translateX(-5px); }
+    75% { transform: rotate(135deg) translateX(5px); }
+    100% { top: 120%; left: 120%; transform: rotate(135deg) translateX(0); }
+}
+
+@keyframes crawlUp {
+    0% { bottom: -20%; right: 10%; transform: rotate(0deg) translateX(0); }
+    25% { transform: rotate(0deg) translateX(-5px); }
+    50% { transform: rotate(0deg) translateX(5px); }
+    75% { transform: rotate(0deg) translateX(-5px); }
+    100% { bottom: 120%; right: 10%; transform: rotate(0deg) translateX(0); }
+}
+
+/* =========================================
+   MAIN CONTAINER 
+   ========================================= */
+.app-container {
+    width: 100%;
+    max-width: 950px;
+    height: calc(100vh - 40px);
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-card);
+    border-radius: 16px; 
+    box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0,0,0,0.02);
+    overflow: hidden; 
+    z-index: 10;
+}
+
+/* Header */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 28px;
+    background: #ffffff;
+    border-bottom: 1px solid var(--border-light);
+    overflow: visible;
+}
+
+.header-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-icon {
+    font-size: 28px;
+    color: var(--spider-accent);
+    animation: pulse 3s infinite alternate; 
+}
+
+@keyframes pulse {
+    0% { filter: drop-shadow(0 0 2px rgba(29, 78, 216, 0.2)); }
+    100% { filter: drop-shadow(0 0 8px rgba(29, 78, 216, 0.6)); }
+}
+
+.header-title h1 {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    color: var(--text-main);
+}
+
+.subtitle {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+/* --- HANGING SPIDER ON EXPORT BUTTON --- */
+.secondary-btn {
+    background: var(--bg-card);
+    color: var(--spider-accent);
+    border: 1px solid var(--spider-accent);
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 13px;
+    transition: all 0.2s;
+    position: relative; 
+}
+
+.secondary-btn:hover {
+    background: var(--emergency-bg);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(29, 78, 216, 0.15);
+}
+
+/* The Silk Thread */
+#export-btn::before {
+    content: "";
+    position: absolute;
+    right: 20px;
+    width: 1.5px;
+    background-color: var(--spider-accent);
+    z-index: 5;
+    animation: dropThread 4s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+}
+
+/* The Hanging Spider */
+#export-btn::after {
+    content: "\f717"; 
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    position: absolute;
+    right: 14px;
+    color: var(--spider-accent);
+    font-size: 13px;
+    z-index: 6;
+    animation: dropSpider 4s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.2));
+}
+
+@keyframes dropThread {
+    0% { height: 0px; bottom: 0px; }
+    100% { height: 35px; bottom: -35px; } 
+}
+
+@keyframes dropSpider {
+    0% { bottom: 0px; transform: rotate(180deg) scale(0); opacity: 0; }
+    10% { opacity: 1; transform: rotate(180deg) scale(1); }
+    100% { bottom: -40px; transform: rotate(180deg) scale(1); } 
+}
+
+/* =========================================
+   CHAT WINDOW
+   ========================================= */
+.chat-window {
+    flex: 1;
+    overflow-y: auto;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    background-color: var(--bg-card);
+}
+
+.welcome-card {
+    text-align: center;
+    padding: 40px 20px;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    margin: auto 0;
+    transition: transform 0.3s ease;
+}
+
+.welcome-card:hover {
+    transform: translateY(-2px);
+}
+
+.welcome-icon {
+    font-size: 40px;
+    color: var(--primary); 
+    margin-bottom: 16px;
+}
+
+.welcome-card h2 {
+    font-size: 20px;
+    margin-bottom: 8px;
+    color: var(--text-main);
+}
+
+.welcome-card p {
+    font-size: 14px;
+    color: var(--text-muted);
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* =========================================
+   MESSAGES
+   ========================================= */
+.message {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.message.user {
+    align-items: flex-end;
+}
+
+.user .message-bubble {
+    background: var(--primary); 
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px 8px 2px 8px;
+    font-size: 15px;
+    max-width: 75%;
+    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.15);
+}
+
+.message.assistant {
+    align-items: flex-start;
+}
+
+.assistant .message-bubble {
+    background: var(--bg-panel);
+    color: var(--text-main);
+    padding: 20px 24px;
+    border-radius: 0 8px 8px 0; 
+    font-size: 15px;
+    line-height: 1.6;
+    width: 100%;
+    border-left: 4px solid var(--spider-accent);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+}
+
+/* Features */
+.confidence-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.confidence-badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    color: white;
+}
+.confidence-high { background: var(--success-green); }
+.confidence-med { background: var(--warning-amber); }
+
+.sources-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.source-badge {
+    font-size: 12px;
+    background: var(--bg-page);
+    color: var(--primary);
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid var(--border-light);
+    font-weight: 500;
+}
+
+.emergency-alert {
+    background: var(--emergency-bg);
+    border-left: 4px solid var(--emergency-text);
+    color: var(--emergency-text);
+    padding: 16px 20px;
+    border-radius: 0 8px 8px 0;
+    font-weight: 600;
+    width: 100%;
+}
+
+/* =========================================
+   INPUT AREA 
+   ========================================= */
+.chat-footer {
+    padding: 20px 28px;
+    border-top: 1px solid var(--border-light);
+    background: #ffffff;
+}
+
+.input-form {
+    display: flex;
+    gap: 12px;
+}
+
+.input-form input {
+    flex: 1;
+    padding: 14px 16px;
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.2s;
+    background: var(--bg-panel);
+}
+
+.input-form input:focus {
+    border-color: var(--primary);
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+}
+
+.primary-btn {
+    background: var(--spider-accent); 
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 8px; 
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.primary-btn:hover {
+    background: var(--spider-accent-hover);
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(29, 78, 216, 0.2);
+}
+
+.disclaimer {
+    font-size: 12px;
+    color: var(--spider-accent);
+    text-align: center;
+    margin-top: 12px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
